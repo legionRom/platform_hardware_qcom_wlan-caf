@@ -154,6 +154,7 @@ typedef struct hal_info_s {
     wifi_capa capa;
     struct cld80211_ctx *cldctx;
     bool apf_enabled;
+    bool support_nan_ext_cmd;
 } hal_info;
 
 wifi_error wifi_register_handler(wifi_handle handle, int cmd, nl_recvmsg_msg_cb_t func, void *arg);
@@ -187,9 +188,11 @@ wifi_error wifi_stop_rssi_monitoring(wifi_request_id id, wifi_interface_handle i
 wifi_error wifi_set_radio_mode_change_handler(wifi_request_id id, wifi_interface_handle
         iface, wifi_radio_mode_change_handler eh);
 wifi_error mapKernelErrortoWifiHalError(int kern_err);
+#ifdef WCNSS_QTI_AOSP
 wifi_error wifi_add_or_remove_virtual_intf(wifi_interface_handle iface,
                                            const char* ifname, u32 iface_type,
                                            bool create);
+#endif
 // some common macros
 
 #define min(x, y)       ((x) < (y) ? (x) : (y))
